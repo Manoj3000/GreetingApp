@@ -22,4 +22,9 @@ public class GreetingServiceImpl implements IGreetingService {
 		return greetingApp.save(greeting);
 	}
 
+	@Override
+	public Greeting findGreetingById(long id) {
+		return greetingApp.findById(id).get();
+	}
+
 }
