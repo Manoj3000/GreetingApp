@@ -34,4 +34,11 @@ public class GreetingServiceImpl implements IGreetingService {
 		return greetingApp.findAll();
 	}
 
+	@Override
+	public Greeting editGreeting(Greeting greeting) {
+		Greeting greetingDetails = greetingApp.findById(greeting.getId()).get();
+		greetingDetails.setMessage(greeting.getMessage());
+		return greetingApp.save(greetingDetails);
+	}
+
 }
