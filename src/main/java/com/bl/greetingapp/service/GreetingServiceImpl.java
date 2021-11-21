@@ -41,4 +41,10 @@ public class GreetingServiceImpl implements IGreetingService {
 		return greetingApp.save(greetingDetails);
 	}
 
+	@Override
+	public void deleteGreeting(long id) {
+		Greeting greeting = greetingApp.findById(id).get();
+		greetingApp.delete(greeting);
+	}
+
 }
