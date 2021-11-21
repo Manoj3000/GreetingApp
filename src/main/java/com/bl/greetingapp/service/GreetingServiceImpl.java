@@ -1,18 +1,25 @@
 package com.bl.greetingapp.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bl.greetingapp.dao.IGreetingApp;
+import com.bl.greetingapp.model.Greeting;
 import com.bl.greetingapp.model.User;
 
 @Service
 public class GreetingServiceImpl implements IGreetingService {
 
+	@Autowired
+	private IGreetingApp greetingApp;
+	
 	@Override
-	public String addGreeting(User user) {
+	public Greeting addGreeting(User user, Greeting greeting) {
 		String message = String.format("Hello %s ",
 				(user.getFirstname().isEmpty()) ? (user.getLastname().isEmpty()) ? "World" : user.getLastname()
 						: user.getLastname().isEmpty() ? user.getFirstname() : user.getFirstname()+" "+user.getLastname());
-		return message;
+		greeting.setMessage(message);
+		return greetingApp.save(greeting);
 	}
 
 }

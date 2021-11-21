@@ -2,9 +2,11 @@ package com.bl.greetingapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bl.greetingapp.model.Greeting;
 import com.bl.greetingapp.model.User;
 import com.bl.greetingapp.service.IGreetingService;
 
@@ -14,12 +16,12 @@ public class GreetingController {
 	private IGreetingService greetingService;
 
 	@GetMapping("/greeting")
-	public String greeting(@RequestParam(defaultValue = "") String firstname,
-			@RequestParam(defaultValue = "") String lastname) {
+	public Greeting greeting(@RequestParam(defaultValue = "") String firstname,
+			@RequestParam(defaultValue = "") String lastname, Greeting greeting) {
 		User user = new User();
 		user.setFirstname(firstname);
 		user.setLastname(lastname);
-		return greetingService.addGreeting(user);
+		return greetingService.addGreeting(user, greeting);
 	}
 
 }
